@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Kanit:900|Raleway');
+
+/*songs*/
+
+html,body{
+	font-family: 'Raleway', sans-serif; 
+}
+
+body{
+	background-color: #DE353A;
+	font-family: 'Raleway', sans-serif; 
+	color:white;
+}
+
+a:hover, a:focus{
+	color:white;
+}
+.container{
+	margin-top: 20px;
+}
+
+h1,h2,h3{
+	font-family: 'Raleway', sans-serif;
+	font-weight: 900;
+}
+
+h2{
+	text-transform: uppercase;
+}
+
+.list_rey{
+	width: 80%;
+	max-width: 600px;
+	margin:auto;
+}
+
+.list_rey li{
+	list-style: none;
+	background: white;
+	color:#DE353A;
+	padding: 10px;
+	margin-bottom:10px;
+	border-radius: 5px;
+}
