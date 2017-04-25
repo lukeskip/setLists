@@ -77,6 +77,8 @@ class SetlistController extends Controller
 			
 			if (Auth::user()->id === $setlist->user_id) {
             	return view('setlists.show', ['setlist' => Setlist::findOrFail($id),'songs'=>Song::where('setlist_id', '=',$id)->orderBy('position')->get()]);
+        	}else{
+        		return "No estas autorizado para estar aquí";
         	}
 			
 		}else{
