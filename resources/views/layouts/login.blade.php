@@ -25,25 +25,15 @@
 	</head>
 	<body>
 
-		<div class="loader_wrapper">
-			<div class="loader"></div>
-		</div>	
+				
 		<div class="container">
-			
+			<div class="text-center">
+				<img src="{{asset('img/logo_rey_full.png')}}" width="180" alt="">
+			</div>
 			<h1 class="text-center">
 				@yield('title')
 			</h1>
-			<nav class="main">
-				<ul>
-					{{-- <li><a href="#">Perfil</a></li> --}}
-					<li>{!! link_to_route('setlists.index', 'Mis Setlist') !!}</li>
-					<li><a href="/logout">Salir</a></li>
-
-
-				</ul>
-			</nav>
 			@yield('content')
-			
 				
 				<!-- <section data-background-image="img/back.jpg">
 				
@@ -69,12 +59,7 @@
 					
 				
 		</div><!--END: CONTAINER-->
-		<footer>
-			<div><img src=" {{asset('img/logo_rey.png')}} " width="130" alt=""></div>
-			Todos los derechos reservados,2017.
-		</footer>
 
-		@yield('modal')
 		
 
 		<script src="{{asset('js/vendor/jquery.js')}}"></script>

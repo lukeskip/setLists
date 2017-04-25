@@ -10,4 +10,8 @@ class Song extends Model
     {
         return $this->belongsTo('App\Setlist');
     }
+
+    protected $fillable = [
+        'name','position'
+    ];
 }
