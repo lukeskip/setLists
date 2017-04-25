@@ -94,6 +94,7 @@ $(document).ready(function(){
 
 	$(document).on('submit','#add_setlist',function(e){
 		e.preventDefault();
+		alert("hola");
 		type 	= $(this).data("type");
 		if(type == "setlist"){
 			if($('#name').val()!=''){
