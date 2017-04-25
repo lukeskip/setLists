@@ -22,7 +22,6 @@ Route::resource('setlists', 'SetlistController');
 Route::post('deleteSetlist/{id}','SetlistController@destroy');
 Route::post('deleteSong/{id}','SongController@destroy');
 Route::post('/send', 'EmailController@send');
-Route::post('/addSetlist', 'Setlist@store');
 
 
 

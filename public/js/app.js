@@ -94,7 +94,6 @@ $(document).ready(function(){
 
 	$(document).on('submit','#add_setlist',function(e){
 		e.preventDefault();
-		alert("hola");
 		type 	= $(this).data("type");
 		if(type == "setlist"){
 			if($('#name').val()!=''){
@@ -105,10 +104,10 @@ $(document).ready(function(){
 					beforeSend: function( xhr ) {
     					$('.loader_wrapper').css('display','block');
   					},
-					url: APP_URL + '/setlists/',
+					url: APP_URL + '/setlists',
 					success:function(response)
 					{
-					
+						console.log(response);
 						if(response.status=='success'){
 							window.location.replace(APP_URL+'/setlists/'+response.id);
 						}else{
