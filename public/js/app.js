@@ -55,7 +55,7 @@ $(document).ready(function(){
 		id 		= $(this).data("id");
 		type 	= $(this).data("type");
 		swal({
-		  title: "¿Estás seguro de querer borrar este item?",
+		  title: "¿Estás seguro?",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DE353A",
@@ -65,9 +65,9 @@ $(document).ready(function(){
 		},
 		function(){
 			if(type == "setlist"){
-				url = /deleteSetlist/;
+				url = "/deleteSetlist/";
 			}else{
-				url = /deleteSong/;
+				url = "/deleteSong/";
 			}
 			$.ajax({
 				headers: {
@@ -168,7 +168,19 @@ $(document).ready(function(){
 			{
 
 				if(response.status=='success'){
-					window.location.replace(APP_URL+'/setlists/'+response.id);
+					swal({
+					  title: "Listo",
+					  text: "Tu setlist fue guardado",
+					  type: "success",
+					  showCancelButton: false,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "OK!",
+					  closeOnConfirm: true
+					},
+					function(){
+					  window.location.replace(APP_URL+'/setlists/'+response.id);
+					});
+					
 				}else{
 					sweetAlert("Ese setlist ya existe", "", "error");
 				}
@@ -220,9 +232,9 @@ $(document).ready(function(){
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				},
 				type: 'POST',
-				data: {email:'contacto@chekogarcia.com.mx',id:setlis_id},
+				data: {email:email,id:setlis_id},
 				dataType: "JSON",
-				url: APP_URL + '/send/',
+				url: APP_URL + '/send',
 				beforeSend: function( xhr ) {
     				$('.loader_wrapper').css('display','block');
   				},
@@ -245,6 +257,8 @@ $(document).ready(function(){
 
 	//RECABAMOS LA INFORMACIÓN Y LA GUARDAMOS EN OBJETOS
 	function data_track (){
+		songs 		 = [];
+		songs_update = [] 
 		$( ".song" ).each(function( index ) {
 			$(this).data("order",index);
 		});

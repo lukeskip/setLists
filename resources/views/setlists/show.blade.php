@@ -11,7 +11,7 @@
 		</div>
 	
 		<div class="medium-6 columns">
-			<a class="rey_button  send" data-email="{{{ Auth::user()->email}}}" data-id="{{$setlist->id}}"><i class="fa fa-envelope" aria-hidden="true"></i> Enviar por correo</a>
+			<a class="rey_button  send" data-email="{{{ Auth::user()->email}}}" data-id="{{$setlist->id}}"><i class="fa fa-envelope" aria-hidden="true"></i> Enviar a mi correo</a>
 		</div>
 
 		<div class="large-12 columns">
