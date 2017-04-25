@@ -101,6 +101,9 @@ $(document).ready(function(){
 					type: 'POST',
 					data: $('#add_setlist').serialize(),
 					dataType: "JSON",
+					beforeSend: function( xhr ) {
+    					$('.loader_wrapper').css('display','block');
+  					},
 					url: APP_URL + '/setlists/',
 					success:function(response)
 					{
