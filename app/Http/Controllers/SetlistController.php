@@ -73,7 +73,7 @@ class SetlistController extends Controller
 	{
 		if (Auth::check()) {
 			
-			$setlist = Setlist::findOrFail($id)->get();
+			$setlist = Setlist::findOrFail($id);
 			
 			if (Auth::user()->id === $setlist->user_id) {
             	return view('setlists.show', ['setlist' => Setlist::findOrFail($id),'songs'=>Song::where('setlist_id', '=',$id)->orderBy('position')->get()]);
