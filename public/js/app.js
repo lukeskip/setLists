@@ -232,8 +232,15 @@ $(document).ready(function(){
 		if(songs.length !== 0 || songs_update.length !== 0){
 			sweetAlert("Oops...", "Primero guarda los cambios", "error");
 		}else{
-			email 	  = $(this).data('email');
-			setlis_id = $(this).data('id');
+			$('#form_send').foundation('open');
+		}
+	});
+
+	$('body').on('click', '.setlist_send', function() {
+		
+			email 	  = $(".setlist_send_input").val();
+			setlis_id = $(".setlist_send_id").val();
+			$(".setlist_send_input").val("");
 			$.ajax({
 				headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -251,16 +258,18 @@ $(document).ready(function(){
 						console.log(response);
 
 						if(response.status=='success'){
-							swal("Listo!", "Tu set list fue enviado a tu correo electrónico!", "success")
+							swal("Listo!", "Tu set list fue enviado.", "success")
 						}else{
-							sweetAlert("Ese setlist ya existe", "", "error");
+							sweetAlert("Hubo un error", "Por favor inténtalo más tarde", "error");
 						}
+
+						$('#form_send').foundation('open');
 					},
 					error: function(data) {
+						$('.loader_wrapper').css('display','none');
 						sweetAlert("Hubo un error en el servidor", "Por favor, Inténtalo de nuevo en unos minutos", "error");
 					}
 				});
-		}
 		
 	  
 	});

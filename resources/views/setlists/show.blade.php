@@ -11,7 +11,7 @@
 		</div>
 	
 		<div class="medium-6 columns">
-			<a class="rey_button  send" data-email="{{{ Auth::user()->email}}}" data-id="{{$setlist->id}}"><i class="fa fa-envelope" aria-hidden="true"></i> Enviar a mi correo</a>
+			<a class="rey_button  send" data-email="{{{ Auth::user()->email}}}" data-id="{{$setlist->id}}"><i class="fa fa-share-alt" aria-hidden="true"></i> Compartir</a>
 		</div>
 
 		<div class="large-12 columns">
@@ -71,5 +71,20 @@
 			<span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
 		</button>
 
+	</div>
+
+	<div class="reveal" id="form_send" data-reveal>
+	  <h2 >Comparte este setlist</h2>
+
+	  	<form id="setlist_send" action="">
+	  		<label for="">Escribe uno o varios correos electrónicos separados con una coma</label>
+	  		
+	  		<input type="hidden" class="setlist_send_id" value="{{$setlist->id}}">
+			<input type="text" class="setlist_send_input">
+			<div class="rey_button green setlist_send">Guardar</div>
+			<button class="close-button" data-close aria-label="Close modal" type="button">
+				<span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+			</button>
+		</form>
 	</div>
 @stop
