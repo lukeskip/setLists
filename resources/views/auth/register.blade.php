@@ -1,7 +1,7 @@
 @extends('layouts.login')
 
 @section('content')
-    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+    <form class="form-horizontal" role="form" id="register_form" method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -66,6 +66,11 @@
             <div class="col-md-6">
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
             </div>
+        </div>
+
+        <div class="form-group">
+            <a style="color:white" target="_blank" href="http://www.reydecibel.com.mx/terminos-condiciones-generador-setlists/">Conoce nuestros términos y condiciones</a>
+            <br><br>
         </div>
 
         <div class="form-group">

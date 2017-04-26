@@ -37,7 +37,7 @@
 			<nav class="main">
 				<ul>
 					{{-- <li><a href="#">Perfil</a></li> --}}
-					<li><a href="http://reydecibel.com.mx">Blog</a></li>
+					<li><a target="_blank" href="http://reydecibel.com.mx">Blog</a></li>
 					<li>{!! link_to_route('setlists.index', 'Mis Setlist') !!}</li>
 					<li><a href="/logout">Salir</a></li>
 					<li><a style="font-size:1.3em;" target="_blank" href="https://www.facebook.com/ReyDecibelMx/">
@@ -48,36 +48,15 @@
 
 				</ul>
 			</nav>
-			@yield('content')
 			
-				
-				<!-- <section data-background-image="img/back.jpg">
-				
-					<a class="" target="_top" href="https://www.facebook.com/v2.8/dialog/oauth?
-  client_id=851875531619550&scope=public_profile,email
-  &redirect_uri=http://tipodemusico.reydecibel.com.mx/">
-					<img src="img/portada.png" alt="">
-				</a>
-				<a class="next" target="_top" href="">
-					<img src="img/portada.png" alt="">
-				</a>
-				<form action="" id="register">
-					<input type="hidden" name="name" class="name">
-					<input type="hidden" name="lastname" class="lastname">
-					<input type="hidden" name="mail" class="mail">
-					<input type="hidden" name="score" class="score">
-					<input type="hidden" name="answers" class="answers">
-				</form>
-
-				</section> -->
-				
+			@yield('content')	
 				
 					
 				
 		</div><!--END: CONTAINER-->
 		<footer>
 			<div><img src=" {{asset('img/logo_rey.png')}} " width="100" alt=""></div>
-			Todos los derechos reservados,2017.
+			Todos los derechos reservados,2017. <a style="color:white" href="http://www.reydecibel.com.mx/terminos-condiciones-generador-setlists/">Términos y condiciones</a>
 		</footer>
 
 		@yield('modal')
