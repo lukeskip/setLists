@@ -263,7 +263,7 @@ $(document).ready(function(){
 							sweetAlert("Hubo un error", "Por favor inténtalo más tarde", "error");
 						}
 
-						$('#form_send').foundation('open');
+						$('#form_send').foundation('close');
 					},
 					error: function(data) {
 						$('.loader_wrapper').css('display','none');

@@ -69,8 +69,9 @@
         </div>
 
         <div class="form-group">
-            <a style="color:white" target="_blank" href="http://www.reydecibel.com.mx/terminos-condiciones-generador-setlists/">Conoce nuestros términos y condiciones</a>
+            <a style="color:white" target="_blank" href="http://www.reydecibel.com.mx/terminos-condiciones-generador-setlists/">Conoce nuestros términos y condiciones</a> y <a style="color:white" target="_blank" href="http://www.reydecibel.com.mx/aviso-de-privacidad/">Aviso de privacidad</a>
             <br><br>
+
         </div>
 
         <div class="form-group">
