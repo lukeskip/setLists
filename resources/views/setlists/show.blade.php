@@ -79,8 +79,8 @@
 	  	<form id="setlist_send" action="">
 	  		<label for="">Escribe uno o varios correos electrónicos separados con una coma</label>
 	  		
-	  		<input type="hidden" class="setlist_send_id" value="{{$setlist->id}}">
-			<input type="text" class="setlist_send_input">
+	  		<input type="hidden" class="setlist_send_id" value="{{{$setlist->id}}}">
+			<input type="text" class="setlist_send_input" value="{{{ Auth::user()->email}}}">
 			<div class="rey_button green setlist_send">Guardar</div>
 			<button class="close-button" data-close aria-label="Close modal" type="button">
 				<span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
