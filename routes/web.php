@@ -10,14 +10,23 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/','SetlistController@index');
 Route::get('logout', function (){
 	Auth::logout();
 	return redirect('/');
 });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('bienvenido', function (){
+	return view('setlists.welcome');
+});
+
+Route::get('/', function (){
+	return view('setlists.portada');
+});
+
+
+
+Route::get('/home', 'SetlistController@index');
 Route::resource('setlists', 'SetlistController');
 Route::post('deleteSetlist/{id}','SetlistController@destroy');
 Route::post('deleteSong/{id}','SongController@destroy');

@@ -33,16 +33,7 @@
 			<h1 class="text-center">
 				@yield('title')
 			</h1>
-			<nav class="main">
-				<ul>
-					{{-- <li><a href="#">Perfil</a></li> --}}
-					<li><a href="http://reydecibel.com.mx">Blog</a></li>
-					<li>{!! link_to_route('setlists.index', 'Mis Setlist') !!}</li>
-					<li><a href="/logout">Salir</a></li>
-
-
-				</ul>
-			</nav>
+			
 			@yield('content')
 			
 				

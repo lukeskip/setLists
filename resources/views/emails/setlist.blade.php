@@ -14,7 +14,7 @@
    
 @foreach ($songs as $key => $song) 			
 	 <div style="background: #EEEEEE; color:black; padding: 10px;text-align: center; border-radius: 5px;font-size: 25px; margin:20px;">
-		<span>{{{$key}}}.-</span>
+		<span>{{{$key+1}}}.-</span>
 		<span class="title">{{{$song->name}}}</span>
 		<div class="trash" data-type="song" data-id="{{{$song->id}}}"><i class="fa fa-trash" aria-hidden="true"></i></div>
 	</div>

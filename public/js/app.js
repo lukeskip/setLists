@@ -49,6 +49,10 @@ $(document).ready(function(){
 	//  	});
 	// },1000);
 
+	// AVISO BETA
+	$('body').on('click', '.beta', function() {
+		sweetAlert("Así es...", "...aún estamos en fase beta!, si tienes algún problema repórtalo al Rey contacto@reydecibel.com.mx", "warning");
+	});
 
 	// BORRAR SETLIST OR SONG
 	$('body').on('click', '.trash', function() {
@@ -225,31 +229,39 @@ $(document).ready(function(){
 
 	// ENVIAR SETLIST 
 	$('body').on('click', '.send', function() {
-		email 	  = $(this).data('email');
-		setlis_id = $(this).data('id');
-		$.ajax({
-			headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				},
-				type: 'POST',
-				data: {email:email,id:setlis_id},
-				dataType: "JSON",
-				url: APP_URL + '/send',
-				beforeSend: function( xhr ) {
-    				$('.loader_wrapper').css('display','block');
-  				},
-				success:function(response)
-				{
-					$('.loader_wrapper').css('display','none');
-					console.log(response);
+		if(songs.length !== 0 || songs_update.length !== 0){
+			sweetAlert("Oops...", "Primero guarda los cambios", "error");
+		}else{
+			email 	  = $(this).data('email');
+			setlis_id = $(this).data('id');
+			$.ajax({
+				headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					},
+					type: 'POST',
+					data: {email:email,id:setlis_id},
+					dataType: "JSON",
+					url: APP_URL + '/send',
+					beforeSend: function( xhr ) {
+	    				$('.loader_wrapper').css('display','block');
+	  				},
+					success:function(response)
+					{
+						$('.loader_wrapper').css('display','none');
+						console.log(response);
 
-					if(response.status=='success'){
-						swal("Listo!", "Tu set list fue enviado a tu correo electrónico!", "success")
-					}else{
-						sweetAlert("Ese setlist ya existe", "", "error");
+						if(response.status=='success'){
+							swal("Listo!", "Tu set list fue enviado a tu correo electrónico!", "success")
+						}else{
+							sweetAlert("Ese setlist ya existe", "", "error");
+						}
+					},
+					error: function(data) {
+						sweetAlert("Hubo un error en el servidor", "Por favor, Inténtalo de nuevo en unos minutos", "error");
 					}
-				}
-			});
+				});
+		}
+		
 	  
 	});
 
