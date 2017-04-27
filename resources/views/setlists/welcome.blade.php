@@ -7,6 +7,7 @@
 	
 	<div class="text-center">
 		<img src="{{asset('img/portada.png')}}" width="400" alt="">
+		
 	</div>
 	<br><br>
 	<a class="rey_button green" data-open="form_create"><i class="fa fa-plus-circle" aria-hidden="true"></i> Crea tu primer setlist</a>
