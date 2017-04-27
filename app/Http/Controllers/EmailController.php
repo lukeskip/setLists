@@ -27,7 +27,7 @@ class EmailController extends Controller
                 Mail::send('emails.setlist', ['setlist' => Setlist::findOrFail($id),'songs'=>Song::where('setlist_id', '=',$id)->orderBy('position')->get()], function ($message)use ($email)
                 {
 
-                $message->from('contacto@reydecibel.com.mx', 'Rey Decibel')->subject('Tu Setlist by Rey Decibel');;
+                $message->from('no_replay@reydecibel.com.mx', 'Rey Decibel')->subject('Tu Setlist by Rey Decibel');;
 
                 $message->to($email);
 

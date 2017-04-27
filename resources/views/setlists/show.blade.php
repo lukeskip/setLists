@@ -81,7 +81,7 @@
 	  		
 	  		<input type="hidden" class="setlist_send_id" value="{{{$setlist->id}}}">
 			<input type="text" class="setlist_send_input" value="{{{ Auth::user()->email}}}">
-			<div class="rey_button green setlist_send">Guardar</div>
+			<div class="rey_button green setlist_send">Enviar</div>
 			<button class="close-button" data-close aria-label="Close modal" type="button">
 				<span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
 			</button>

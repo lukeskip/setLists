@@ -240,7 +240,6 @@ $(document).ready(function(){
 		
 			email 	  = $(".setlist_send_input").val();
 			setlis_id = $(".setlist_send_id").val();
-			$(".setlist_send_input").val("");
 			$.ajax({
 				headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
