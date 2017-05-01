@@ -14,7 +14,7 @@ class CreateSongsTable extends Migration
     public function up()
     {
         Schema::table('songs', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
             $table->integer('setlist_id');
             $table->integer('position');
             $table->string('name');
@@ -29,8 +29,6 @@ class CreateSongsTable extends Migration
      */
     public function down()
     {
-        Schema::table('songs', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('songs');
     }
 }

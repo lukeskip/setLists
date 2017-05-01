@@ -28,6 +28,7 @@ Route::get('/', function (){
 
 Route::get('/home', 'SetlistController@index');
 Route::resource('setlists', 'SetlistController');
+Route::resource('presskits', 'PresskitController');
 Route::post('deleteSetlist/{id}','SetlistController@destroy');
 Route::post('deleteSong/{id}','SongController@destroy');
 Route::post('/send', 'EmailController@send');

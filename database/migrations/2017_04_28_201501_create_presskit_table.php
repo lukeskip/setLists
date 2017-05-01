@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSetlistTable extends Migration
+class CreatePresskitTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateSetlistTable extends Migration
      */
     public function up()
     {
-        Schema::table('setlists', function (Blueprint $table) {
-            // $table->increments('id');
+        Schema::create('presskits', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->text('history');
+            $table->string('genre');
+            $table->text('sound');
             $table->integer('user_id');
-            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateSetlistTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setlists');
+        Schema::dropIfExists('presskits');
     }
 }
