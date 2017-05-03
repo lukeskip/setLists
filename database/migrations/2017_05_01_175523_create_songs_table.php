@@ -13,11 +13,13 @@ class CreateSongsTable extends Migration
      */
     public function up()
     {
-        Schema::table('songs', function (Blueprint $table) {
-            // $table->increments('id');
-            $table->integer('setlist_id');
-            $table->integer('position');
-            $table->string('name');
+        Schema::create('songs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('position')->nullable();
+            $table->string('name')->unique();
+            $table->string('intencity');
+            $table->string('duration');
             $table->timestamps();
         });
     }

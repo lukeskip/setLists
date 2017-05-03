@@ -9,7 +9,7 @@
 	@foreach ($setlists as $list)
 		<li>
 			{!! link_to_route('setlists.show', $list->name, [$list->id]) !!}
-			<div class="trash" data-id="{{{$list->id}}}" data-type="setlist"><i class="fa fa-trash" aria-hidden="true"></i></div>
+			<div class="trash" data-id="{{{$list->id}}}" data-type="setlist_delete"><i class="fa fa-trash" aria-hidden="true"></i></div>
 		</li>
 		
 	@endforeach

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePresskitDataTable extends Migration
+class CreateSetlistSongTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreatePresskitDataTable extends Migration
      */
     public function up()
     {
-        Schema::create('presskit_data', function (Blueprint $table) {
+        Schema::create('setlist_song', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('section');
-            $table->string('icon')->nullable();
-            $table->string('label');
-            $table->string('value');
-            $table->integer('presskit_id');
+            $table->integer('setlist_id');
+            $table->integer('song_id');
+            $table->integer('position');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreatePresskitDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('presskit_data');
+        Schema::dropIfExists('setlist_song');
     }
 }

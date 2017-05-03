@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSetlistTable extends Migration
+class CreateSetlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateSetlistTable extends Migration
      */
     public function up()
     {
-        Schema::table('setlists', function (Blueprint $table) {
-            // $table->increments('id');
+        Schema::create('setlists', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('user_id');
             $table->string('name')->unique();
             $table->timestamps();

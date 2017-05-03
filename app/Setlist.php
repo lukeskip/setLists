@@ -12,7 +12,7 @@ class Setlist extends Model
     }
     public function songs()
     {
-        return $this->hasMany('App\Song');
+        return $this->belongsToMany('App\Song')->withPivot('position')->orderBy('setlist_song.position', 'asc');
     }
 
 

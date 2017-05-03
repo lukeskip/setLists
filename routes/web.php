@@ -31,7 +31,10 @@ Route::resource('setlists', 'SetlistController');
 Route::resource('presskits', 'PresskitController');
 Route::post('deleteSetlist/{id}','SetlistController@destroy');
 Route::post('deleteSong/{id}','SongController@destroy');
+Route::get('/songs','SongController@index')->name('songsIndex');;
 Route::post('/send', 'EmailController@send');
+Route::post('/songs/{id}', 'SongController@edit');
+Route::post('/newSong', 'SongController@store');
 
 
 

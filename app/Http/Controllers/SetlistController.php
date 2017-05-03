@@ -72,11 +72,12 @@ class SetlistController extends Controller
 	public function show($id)
 	{
 		if (Auth::check()) {
-			
+			$user_id = Auth::user()->id;
 			$setlist = Setlist::findOrFail($id);
-			
-			if (Auth::user()->id === $setlist->user_id) {
-            	return view('setlists.show', ['setlist' => Setlist::findOrFail($id),'songs'=>Song::where('setlist_id', '=',$id)->orderBy('position')->get()]);
+			$songs = Song::where('user_id', $user_id)->get();
+
+			if ($user_id === $setlist->user_id) {
+            	return view('setlists.show', ['setlist' => $setlist,'songs'=>$songs]);
         	}else{
         		return "No estas autorizado para estar aquí";
         	}
@@ -108,6 +109,8 @@ class SetlistController extends Controller
 	public function update(Request $request, $id)
 	{
 		$type = 'none';
+		$data = array();
+		$setlist = Setlist::findOrFail($id);
 		//REVISAMOS SI HAY INFORMACIÓN EN EL TÍTULO, LA VALIDAMOS Y GUARDAMOS
 		if($request->input('name')!=''){
 			$type = 'title';
@@ -119,7 +122,7 @@ class SetlistController extends Controller
 				return response()->json(['status' => 'error']); 
 			}
 
-			$setlist = Setlist::findOrFail($id);;
+			
 			$name = $request->input('name');
 			$setlist->name = $name;
 			$setlist->update();
@@ -127,35 +130,17 @@ class SetlistController extends Controller
 		
 		// CREAMOS LAS CANCIONES NUEVAS
 		if($request->input('songs')!=''){
-			$type = 'songs_create';
-			$data = array();
-			$setlist = Setlist::find($id);
-			$songs = json_decode($request->input('songs'),true);
 
-			foreach ($songs as $key => $value) {
-				$row = array();
-				$row['name'] = $value['title'];
-				$row['position'] = $value['position'];
-				$data[] = $row;
-
-			}
-			$setlist->songs()->createMany($data);    
+			    
 		}
 
-		// ACTUALIZAMOS CANCIONES CREADAS
+		// ACTUALIZAMOS POSICIONES DE CANCIONES
 		if($request->input('songs_update')!=''){
 			$type = 'songs_update';
 			$songs_update = json_decode($request->input('songs_update'),true);
-
 			foreach ($songs_update as $key => $value) {
+				Setlist::find($id)->songs()->updateExistingPivot($value['id'], [ 'position' => $value['position']]);
 
-				$song = Song::findOrFail($value['id']);
-				$name = $value['title'];
-				$song->name = $name;
-				$position = $value['position'];
-				$song->position = $position;
-
-				$song->update();
 			}
 			
 			
@@ -170,10 +155,22 @@ class SetlistController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy($id,Request $request)
 	{
-		$findRecord = Setlist::findOrFail($id);
-		$findRecord->delete();
-		return 'success';
+
+		if($request->input('type')== 'song_detach'){
+			$type  	 = 'song_detach';
+			$song_id =  $request->input('song_id');
+			$setlist = Setlist::findOrFail(1);
+			$setlist->songs()->detach($song_id);
+
+		}else if($request->input('type')== 'setlist_delete'){
+			$type = 'setlist_delete';
+			$setlist = Setlist::findOrFail($id);
+			$setlist->delete();
+			
+		}
+
+		return response()->json(['status' => 'success','type'=>$type,'id',$id]);
 	}
 }

@@ -8,10 +8,10 @@ class Song extends Model
 {
     public function setlists()
     {
-        return $this->belongsTo('App\Setlist');
+        return $this->belongsToMany('App\Setlist')->withPivot('position');;
     }
 
     protected $fillable = [
-        'name','position'
+        'name','position','intencity','duration','user_id'
     ];
 }

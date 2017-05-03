@@ -21,6 +21,14 @@ label{
 	font-style: italic;
 }
 
+/*FORM*/
+
+input[type="text"]{
+	border-radius:5px;
+}
+
+
+
 .beta{
 	position: absolute;
 	top: -1px;
@@ -183,6 +191,18 @@ nav.main ul li a{
 }
 
 
+/*SETLIST & SONGS*/
+.title{
+	color: #666;
+}
+
+.duration{
+	color:#333;
+}
+
+
+
+
 .reveal{
 	background-image:url(../img/back.jpg);
 	padding: 40px;
@@ -261,6 +281,90 @@ nav.main ul li a{
 	height: 30px;
 	text-align: center;
 	font-size: .7em;
+}
+
+/*JQUERY UI*/
+
+.option .ui-state-default, .ui-widget-header .ui-state-default, .option .ui-button{
+	width: 100%;
+	border:none;
+	margin-bottom: 5px;
+	padding: 10px;
+	border:none;
+	outline: none !important;
+	box-shadow: none;
+	font-family: 'Raleway', sans-serif; 
+	font-style: normal;
+}
+
+.option .ui-button:active, .option .ui-button.ui-state-active:hover{
+	background: green;
+	border:none;
+}
+
+.option.high .ui-state-active,.option.high .ui-button:active, .option.high .ui-button.ui-state-active:hover{
+	background: red;
+	border:none;
+}
+
+.option.medium .ui-state-active,.option.medium .ui-button:active, .option.medium .ui-button.ui-state-active:hover{
+	background: #F1BD2B;
+	border:none;
+}
+
+
+.option.low .ui-state-active,.option.low .ui-button:active, .option.low .ui-button.ui-state-active:hover{
+	background: green;
+	border:none;
+}
+
+.ui-button .ui-icon{
+	display: none;
+}
+
+.wrapper_slider .duration_slider{
+	width:70%;
+	float: left;
+	margin-top:5px;
+}
+
+.wrapper_slider .display_slider{
+	width:30%;
+	float: left;
+	text-align: center;
+}
+
+.ui-slider .ui-slider-handle{
+	border-radius: 100%;
+	outline: none !important;
+	-webkit-box-shadow: 9px 14px 62px -19px rgba(0,0,0,0.75);
+	-moz-box-shadow: 9px 14px 62px -19px rgba(0,0,0,0.75);
+	box-shadow: 9px 14px 62px -19px rgba(0,0,0,0.75);
+	background: url(../img/handle.png)center;
+	border:5px solid black;
+	width: 1.5em;
+	height: 1.5em;
+
+}
+
+.ui-slider-horizontal .ui-slider-handle{
+	top: -.3em;
+}
+
+.ui-slider-range{
+	background: black;
+}
+
+.ui-widget-content,.ui-widget.ui-widget-content{
+	border:none;
+	background: url('../img/slider_back.png');
+	background-size: auto 100%;
+	background-position: center center;
+}
+
+/*SELECT2*/
+.select2-container{
+	display: block;
 }
 
 footer{

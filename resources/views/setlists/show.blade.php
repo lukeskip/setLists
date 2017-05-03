@@ -6,15 +6,19 @@
 	
 	<div class="row">
 		
-		<div class="medium-6 columns">
+		<div class="small-6 columns">
 			<a class="rey_button save"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</a>
 		</div>
 	
-		<div class="medium-6 columns">
+		<div class="small-6 columns">
 			<a class="rey_button  send" data-email="{{{ Auth::user()->email}}}" data-id="{{$setlist->id}}"><i class="fa fa-share-alt" aria-hidden="true"></i> Compartir</a>
 		</div>
 
-		<div class="large-12 columns">
+		<div class="small-6 columns">
+			<a class="rey_button green  create_song"><i class="fa fa-plus-circle" aria-hidden="true"></i> Crear Canción</a>
+		</div>
+
+		<div class="small-6 columns">
 			<a class="rey_button green  add_song"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Canción</a>
 		</div>
 
@@ -23,41 +27,93 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<ul id="sortable" class="list_rey">
-
-				@foreach ($songs as $key => $song) 
+				@foreach ($setlist->songs as $key => $song) 
 							
 							
-			   		<li class="song old" 
-			   			data-title="{{{$song->name}}}" 
-			   			data-position="{{{$song}}}" 
-			   			data-id="{{{$song->id}}}"
-			   			data-type="old"
-			   		>
-				   			<span class="title">{{{$song->name}}}</span>
-				   			<div class="trash" data-type="song" data-id="{{{$song->id}}}"><i class="fa fa-trash" aria-hidden="true"></i></div>
-			   		</li>
-			   	@endforeach
+					<li class="song old" 
+						data-title="{{{$song->name}}}" 
+						data-position="{{{$song->pivot}}}" 
+						data-id="{{{$song->id}}}"
+						data-intencity="{{{$song->intencity}}}"
+						data-duration="{{{$song->duration}}}"
+						data-type="old"
+					>		
+							<span class="duration">[{{{$song->duration}}}]</span>
+							<span class="title">{{{$song->name}}}</span>
+							
+							<span class="intencity {{{$song->intencity}}}"></span>
+							<div class="trash" data-type="song_detach" data-song_id="{{{$song->id}}}" data-id="{{{$setlist->id}}}"><i class="fa fa-trash" aria-hidden="true"></i></div>
+					</li>
+				@endforeach
 			</ul>
-	   	</div>
-   	</div>
-   	<div class="row">
-   		<div class="large-12 columns text-center">
-   			<small>
+		</div>
+	</div>
+	{{-- <div class="row">
+		<div class="large-12 columns text-center">
+			<small>
 				Instrucciones: Agrega una canción nueva, dando click sobre ella podrás cambiar su nombre, finalmente, arrástralas para ordenarlas a tus gusto.
 			</small>
-   		</div>
-   	</div>
+		</div>
+	</div> --}}
 @stop
 @section('modal')
 	<div class="reveal" id="form_create" data-reveal>
-	  <h2 >Edita el nombre de la canción</h2>
-	  	<form id="song_save" action="">
-			<input type="text" class="song_input">
-			<div class="rey_button green song_save">Guardar</div>
-			<button class="close-button" data-close aria-label="Close modal" type="button">
-				<span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
-			</button>
-		</form>
+	  <h2 >Agraga una nueva canción</h2>
+		
+			<form id="song_save" action="">
+				<div class="row">
+					<div class="large-12 columns">
+						<label>Título:</label>
+						<input type="text" class="song_input" name="name">
+						<input type="hidden"  name="id" value="{{$setlist->id}}">
+						<input type="hidden"  name="_method" value="POST">
+						<input type="hidden"  name="songs" value="true">	
+					
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="medium-4 column">
+						<label>Intencidad:</label>
+						<fieldset>
+							<div class="option high">
+								<label for="high">Alta</label>
+								<input type="radio" name="intencity" id="high">
+							</div>
+							<div class="option medium">
+								<label for="medium">Media</label>
+								<input type="radio" name="intencity" id="medium">
+							</div>
+							<div class="option low">
+								<label for="low">Baja</label>
+								<input type="radio" name="intencity" id="low">
+							</div>
+							
+						</fieldset>
+					</div>
+					<div class="medium-8 column">
+						<br>
+						<label>Duración:<br><br></label>
+						<div class="wrapper_slider">
+							<div class="duration_slider"></div>
+							<div class="display_slider">00:00</div>
+						</div>
+						<input type="hidden" name="duration" class="song_duration">	
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 columns">
+						<br>
+						<div class="rey_button green song_save">Guardar</div>
+					</div>
+				</div>
+				
+				
+				<button class="close-button" data-close aria-label="Close modal" type="button">
+					<span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+				</button>
+			</form>
+		
 
 	</div>
 
@@ -76,12 +132,30 @@
 	<div class="reveal" id="form_send" data-reveal>
 	  <h2 >Comparte este setlist</h2>
 
-	  	<form id="setlist_send" action="">
-	  		<label for="">Escribe uno o varios correos electrónicos separados con una coma</label>
-	  		
-	  		<input type="hidden" class="setlist_send_id" value="{{{$setlist->id}}}">
+		<form id="setlist_send" action="">
+			<label for="">Escribe uno o varios correos electrónicos separados con una coma</label>
+			
+			<input type="hidden" class="setlist_send_id" value="{{{$setlist->id}}}">
 			<input type="text" class="setlist_send_input" value="{{{ Auth::user()->email}}}">
 			<div class="rey_button green setlist_send">Enviar</div>
+			<button class="close-button" data-close aria-label="Close modal" type="button">
+				<span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+			</button>
+		</form>
+	</div>
+
+	<div class="reveal" id="form_add" data-reveal>
+	  <h2 >Selecciona de entre tus canciones</h2>
+
+		<form id="song_add" action="">
+			<input type="hidden" name="setlist_id" value="{{{$setlist->id}}}">
+			<select name="song_to_add" id="" class="song_to_add">
+				<option value="">Selecciona una canción...</option>
+				@foreach ($songs as $key => $song)
+					<option value="{{$song->id}}">{{$song->name}}</option>
+				@endforeach
+			</select>
+			<div class="rey_button green song_add_button">Enviar</div>
 			<button class="close-button" data-close aria-label="Close modal" type="button">
 				<span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
 			</button>

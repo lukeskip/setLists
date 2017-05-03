@@ -5,12 +5,15 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Generador de SetList</title>
+		<link rel="stylesheet" href="{{asset('js/vendor/selectize/css/selectize.default.css')}}">
 		<link rel="stylesheet" href="{{asset('css/foundation.css')}}">
+
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="shortcut icon" type="favicon/png" href="{{asset('img/favicon.png')}}"/>
 		
 		<link rel="stylesheet" href="{{asset('js/vendor/jquery-ui/jquery-ui.min.css')}}">
 		<link rel="stylesheet" href="{{asset('js/vendor/sweetalert/sweetalert.css')}}">
+		
 
 		<link rel="stylesheet" href="{{asset('css/app.css')}}">
 		
@@ -48,7 +51,9 @@
 					{{-- <li><a href="#">Perfil</a></li> --}}
 					<li><a target="_blank" href="http://reydecibel.com.mx">Blog</a></li>
 					<li>{!! link_to_route('setlists.index', 'Mis Setlist') !!}</li>
+					<li>{!! link_to_route('songsIndex', 'Mis Canciones') !!}</li>
 					<li><a href="/logout">Salir</a></li>
+					
 					<li><a style="font-size:1.3em;" target="_blank" href="https://www.facebook.com/ReyDecibelMx/">
 							<i class="fa fa-facebook-official" aria-hidden="true"></i>
 						</a>
@@ -77,6 +82,7 @@
 		<script src="{{asset('js/laroute.js')}}"></script>
 		<script src="{{asset('js/vendor/what-input.js')}}"></script>
 		<script src="{{asset('js/vendor/foundation.js')}}"></script>
+		<script src="{{asset('js/vendor/selectize/js/selectize.min.js')}}"></script>
 		<script src="{{asset('js/vendor/sweetalert/sweetalert.min.js')}}"></script>
 		{{-- <script src="{{asset('plugins/angular/angular.min.js')}}"></script> --}}
 
