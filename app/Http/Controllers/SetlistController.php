@@ -75,9 +75,21 @@ class SetlistController extends Controller
 			$user_id = Auth::user()->id;
 			$setlist = Setlist::findOrFail($id);
 			$songs = Song::where('user_id', $user_id)->get();
+			$songs_list = $setlist->songs;
+			$duration = 0;
+			foreach ($songs_list as $key => $song) {
+				$duration_str = explode(':',$song->duration);
+				$minutes = $duration_str[0] * 60;
+				$seconds = $duration_str[1];
+ 				$adding  = $minutes + $seconds;
+ 				$duration= $duration + $adding;
+			}
+			
+			$duration = gmdate("i:s", $duration);
+			
 
 			if ($user_id === $setlist->user_id) {
-            	return view('setlists.show', ['setlist' => $setlist,'songs'=>$songs]);
+            	return view('setlists.show', ['setlist' => $setlist,'songs'=>$songs,'duration'=>$duration]);
         	}else{
         		return "No estas autorizado para estar aquí";
         	}
@@ -111,6 +123,7 @@ class SetlistController extends Controller
 		$type = 'none';
 		$data = array();
 		$setlist = Setlist::findOrFail($id);
+		
 		//REVISAMOS SI HAY INFORMACIÓN EN EL TÍTULO, LA VALIDAMOS Y GUARDAMOS
 		if($request->input('name')!=''){
 			$type = 'title';
@@ -128,11 +141,6 @@ class SetlistController extends Controller
 			$setlist->update();
 		}
 		
-		// CREAMOS LAS CANCIONES NUEVAS
-		if($request->input('songs')!=''){
-
-			    
-		}
 
 		// ACTUALIZAMOS POSICIONES DE CANCIONES
 		if($request->input('songs_update')!=''){
@@ -142,7 +150,6 @@ class SetlistController extends Controller
 				Setlist::find($id)->songs()->updateExistingPivot($value['id'], [ 'position' => $value['position']]);
 
 			}
-			
 			
 		}
 

@@ -14,7 +14,7 @@ $(document).ready(function(){
 		sweetAlert("Así es...", "...aún estamos en fase beta!, si tienes algún problema repórtalo al Rey contacto@reydecibel.com.mx", "warning");
 	});
 
-	// BORRAR SETLIST OR SONG
+	// BORRAR SETLIST OR DETACH
 	$('body').on('click', '.trash', function() {
 		id 		= $(this).data("id");
 		type 	= $(this).data("type");
@@ -54,6 +54,50 @@ $(document).ready(function(){
 		
 	});
 
+	// BORRAR CANCIÓN
+	$('body').on('click', '.trash_song', function() {
+		id 		= $(this).data("id");
+		swal({
+		  title: "¿Estás seguro?",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DE353A",
+		  confirmButtonText: "Aceptar",
+		  cancelButtonText: "Cancelar",
+		  closeOnConfirm: true
+		},
+		function(){
+			$.ajax({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				type: 'POST',
+				url: APP_URL + '/deleteSong/' +id,
+				data : {'_method':'POST'},
+				success:function(response)
+				{
+					
+					if(response.status=='success'){
+						swal({
+						  title: "La canción fue borrada con éxito",
+						  type: "success",
+						  showCancelButton: false,
+						  confirmButtonColor: "#DE353A",
+						  confirmButtonText: "Aceptar",
+						  closeOnConfirm: true
+						},function(){
+							location.reload();
+						});
+						
+					}
+				}
+			});
+		  
+		});
+		
+	});
+
+
 	// CREAR SETLIST 
 	$('body').on('click', '.submit', function() {
 		$(this).parent().submit();		  
@@ -74,7 +118,7 @@ $(document).ready(function(){
 					url: APP_URL + '/setlists',
 					success:function(response)
 					{
-						console.log(response);
+						// console.log(response);
 						if(response.status=='success'){
 							window.location.replace(APP_URL+'/setlists/'+response.id);
 						}else{
@@ -92,7 +136,7 @@ $(document).ready(function(){
 
 
 	// EDITAR SETLIST Y GUARDAR CANCIONES
-	$('body').on('click', '.edit', function() {
+	$('body').on('click', '.edit_setlist', function() {
 		$('#form_update').foundation('open');		  
 	});
 
@@ -133,7 +177,7 @@ $(document).ready(function(){
 			url: APP_URL + '/setlists/'+id,
 			success:function(response)
 			{
-				console.log(response);
+				// console.log(response);
 				if(response.status=='success'){
 					swal({
 					  title: "Listo",
@@ -175,7 +219,7 @@ $(document).ready(function(){
 			url: APP_URL + '/songs/'+id,
 			success:function(response)
 			{
-				console.log(response);
+				// console.log(response);
 				if(response.status=='success'){
 					swal({
 					  title: "Listo",
@@ -197,21 +241,6 @@ $(document).ready(function(){
 		});
 	});
 
-	// $('body').on('click', '.trash_song', function() {
-	// 	$(this).parent().remove();
-	// });
-
-	// $('body').on('click', '.song', function() {
-	// 	song_editing = $(this).data('id');
-	// 	song_type	 = $(this).data('type');
-	// 	$('.song_input').val($(this).find('.title').html());
-	// });
-
-	$('body').on('click', '.song_input', function() {
-		$(this).val("");
-	});
-
-	
 
 	$('body').on('click', '.song_save', function() {
 		$("#song_save").submit();
@@ -223,10 +252,39 @@ $(document).ready(function(){
 		$('#form_create').foundation('open');
 	});
 
+	$('body').on('click', '.create_song_song', function() {
+		$('#form_create').foundation('open');
+		song_refresh();
+		$('#form_create').find('.action').val('create');
+	});
+
+	$('body').on('click', '.edit_song', function(e) {
+		$('#form_create').foundation('open');
+		$('#form_create').find('.action').val('edit');
+		fill_song($(e.target));
+	});
+
 	$('body').on('submit', '#song_save', function(e) {
 		e.preventDefault();
+		
+		var simple   = $('#form_create').find('.simple').val();
+		var action   = $('#form_create').find('.action').val();
+		var id  	 = $('#form_create').find('.song_edit_id').val();
 		var position = $( ".song" ).length;
 		var form  	 = $('#form_create').find('form');
+
+		var url 	 = '';
+
+		// console.log(action);
+
+		if(action == 'edit'){
+			url ='/editSong/'+id;
+		}else{
+			url = '/newSong/';
+		}
+
+		// console.log(id);
+
 		$.ajax({
 			headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -234,14 +292,14 @@ $(document).ready(function(){
 			type: 'POST',
 			data: $(this).serialize()+'&position='+ position,
 			dataType: "JSON",
-			url: APP_URL + '/newSong/',
+			url: APP_URL + url,
 			success:function(response)
 			{
-
+				// console.log(response);
 				if(response.status=='success'){
 					swal({
 					  title: "Listo",
-					  text: "Tu canción fue creada",
+					  text: "Tu canción fue editada",
 					  type: "success",
 					  showCancelButton: false,
 					  confirmButtonColor: "#DD6B55",
@@ -249,16 +307,22 @@ $(document).ready(function(){
 					  closeOnConfirm: true
 					},
 					function(){
-					  window.location.replace(APP_URL+'/setlists/'+response.id);
+						if(simple ==''){
+							window.location.replace(APP_URL+'/setlists/'+response.id);
+						}else{
+							window.location.replace(APP_URL+'/songs/');
+						}
+					  
 					});
 					
 				}else{
-					console.log("hola");
 					sweetAlert("Ese setlist ya existe", "", "error");
 				}
+			},
+			error: function(data) {
+				sweetAlert("Hubo un error en el servidor", "Por favor, Inténtalo de nuevo en unos minutos", "error");
 			}
 		});
-		// data_track ();
 	});
 
 	
@@ -290,7 +354,7 @@ $(document).ready(function(){
 					success:function(response)
 					{
 						$('.loader_wrapper').css('display','none');
-						console.log(response);
+						// console.log(response);
 
 						if(response.status=='success'){
 							swal("Listo!", "Tu set list fue enviado.", "success")
@@ -367,8 +431,11 @@ $(document).ready(function(){
         range: 'min',
         step: 10,
         slide: function(e, ui) {
+    		
             var hours = Math.floor(ui.value / 60);
             var minutes = ui.value - (hours * 60);
+
+    		// console.log(ui.value);
 
             if(hours.toString().length == 1) hours = '0' + hours;
             if(minutes.toString().length == 1) minutes = '0' + minutes;
@@ -386,7 +453,37 @@ $(document).ready(function(){
     });
     $( "input[type=radio]" ).checkboxradio();
 	
+    // FILL RELLENAR 
+    function fill_song(object){
+    	song_refresh()
+    	title 	  = object.parents(".song a").find('.title').html();
+    	duration  = object.parents(".song a").find('.duration').data('value');
+    	intencity = object.parents(".song a").find('.intencity').html();
+    	id 		  = object.parents(".song a").data('id');
+ 
+  		duration_init = duration;
+    	duration = duration.split(':');
+    	hours  	 = (Number(duration[0])*600)/10;
+    	minutes  = Number(duration[1]);
+    	duration = hours + minutes;
+    	$(".duration_slider").slider('value',duration);
 
+  		// rellenamos los valores
+    	$('.song_input').val(title);
+    	$('.display_slider').html(duration_init);
+    	$('.song_edit_id').val(id);
+    	$('.song_duration').val(duration_init)
+    	
+    	$("#"+intencity).prop("checked", true).trigger("change");
+    }
+
+    function song_refresh(){
+    	$('input[type=radio]').each(function(){
+    		$(this).attr('checked',false).button("refresh");
+    	});
+    	$('.song_input').val('');
+    	$(".duration_slider").slider('value',0);
+    }
 });
 
 

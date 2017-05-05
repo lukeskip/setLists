@@ -1,24 +1,25 @@
 @extends('layouts.main')
+@section('menu_extra')
+	<li><a href="#" class="send" data-email="{{{ Auth::user()->email}}}" data-id="{{$setlist->id}}" data-toggle="offCanvasLeft"><i class="fa fa-share-alt" aria-hidden="true" data-toggle="offCanvasLeft"></i> Compartir Setlist</a></li>
+	<li><a href="#" class="create_song" data-toggle="offCanvasLeft"><i class="fa fa-plus-circle" aria-hidden="true"></i> Crear Canción</a></li>
+@stop
 @section('title')
-	<span class="edit">{{{$setlist->name}}}</span>
+	<span class="edit">{{{$setlist->name}}}</span> <span class="duration"> [{{$duration}}] </span>
 @stop
 @section('content')
-	
+	<div class="waves">
+		<h2>Línea de Intensidad</h2>
+		<div class="wave_graphic">
+			<canvas id="myChart" width="80%" height="80"></canvas>
+		</div>
+	</div>
 	<div class="row">
 		
-		<div class="small-6 columns">
+		<div class="medium-6 columns">
 			<a class="rey_button save"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</a>
 		</div>
-	
-		<div class="small-6 columns">
-			<a class="rey_button  send" data-email="{{{ Auth::user()->email}}}" data-id="{{$setlist->id}}"><i class="fa fa-share-alt" aria-hidden="true"></i> Compartir</a>
-		</div>
 
-		<div class="small-6 columns">
-			<a class="rey_button green  create_song"><i class="fa fa-plus-circle" aria-hidden="true"></i> Crear Canción</a>
-		</div>
-
-		<div class="small-6 columns">
+		<div class="medium-6 columns">
 			<a class="rey_button green  add_song"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Canción</a>
 		</div>
 
@@ -38,27 +39,21 @@
 						data-duration="{{{$song->duration}}}"
 						data-type="old"
 					>		
+							<span class="intencity {{{$song->intencity}}}"></span>
 							<span class="duration">[{{{$song->duration}}}]</span>
 							<span class="title">{{{$song->name}}}</span>
-							
-							<span class="intencity {{{$song->intencity}}}"></span>
 							<div class="trash" data-type="song_detach" data-song_id="{{{$song->id}}}" data-id="{{{$setlist->id}}}"><i class="fa fa-trash" aria-hidden="true"></i></div>
 					</li>
 				@endforeach
 			</ul>
+
 		</div>
 	</div>
-	{{-- <div class="row">
-		<div class="large-12 columns text-center">
-			<small>
-				Instrucciones: Agrega una canción nueva, dando click sobre ella podrás cambiar su nombre, finalmente, arrástralas para ordenarlas a tus gusto.
-			</small>
-		</div>
-	</div> --}}
+	
 @stop
 @section('modal')
 	<div class="reveal" id="form_create" data-reveal>
-	  <h2 >Agraga una nueva canción</h2>
+	  <h2 >Agrega una nueva canción</h2>
 		
 			<form id="song_save" action="">
 				<div class="row">
@@ -78,15 +73,15 @@
 						<fieldset>
 							<div class="option high">
 								<label for="high">Alta</label>
-								<input type="radio" name="intencity" id="high">
+								<input type="radio" name="intencity" value="high" id="high">
 							</div>
 							<div class="option medium">
 								<label for="medium">Media</label>
-								<input type="radio" name="intencity" id="medium">
+								<input type="radio" name="intencity" value="medium" id="medium">
 							</div>
 							<div class="option low">
 								<label for="low">Baja</label>
-								<input type="radio" name="intencity" id="low">
+								<input type="radio" name="intencity" value="low" id="low">
 							</div>
 							
 						</fieldset>
@@ -161,4 +156,74 @@
 			</button>
 		</form>
 	</div>
+@stop
+
+@section('javascript')
+	<script>
+		$(document).ready(function(){
+			high    = 15;
+			medium  = 5;
+			low		= 1;
+
+			var chartColors = {
+			  red: 'rgb(255, 99, 132)',
+			  orange: 'rgb(255, 159, 64)',
+			  yellow: 'rgb(255, 205, 86)',
+			  green: 'rgb(75, 192, 192)',
+			  blue: 'rgb(54, 162, 235)',
+			  purple: 'rgb(153, 102, 255)',
+			  grey: 'rgb(231,233,237)',
+			  white: 'rgba(256,256,256)'
+			};
+			Chart.defaults.global.legend.display = false;
+			// Chart.scaleLabel.display = false;
+
+			
+			var ctx = $('#myChart');
+			var myLineChart = Chart.Line(ctx, {
+				scaleShowBackgroudColor: false,
+				
+				scaleShowLabels : false,
+				data: {
+					datasets: [{
+						label: '',
+						steppedLine	:false,
+						fill: false,
+						borderColor:'rgba(256,256,256,.5)',
+						data: [
+							
+							@foreach ($setlist->songs as $key => $song) 
+							{
+								x: {{$key+1}},
+								y: {{$song->intencity}}
+							},
+							@endforeach
+							 
+						]
+					}]
+				},
+				options: {
+					
+					responsive: true,
+					scales: {
+						
+						xAxes: [{
+						
+							type: 'linear',
+                			position: 'bottom',
+                			
+						}],
+						yAxes: [{
+						
+
+							
+						}]
+					},
+					maintainAspectRatio: false,
+				}
+			});
+
+
+		});
+	</script>
 @stop

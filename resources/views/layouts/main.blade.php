@@ -37,41 +37,78 @@
 
 	</head>
 	<body>
+	<div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+	    <!-- Close button -->
+	    <button class="close-button" aria-label="Close menu" type="button" data-close>
+	      <span aria-hidden="true">&times;</span>
+	    </button>
+
+	    <!-- Menu -->
+	    <div class="logo_menu ext-center"><img src="{{asset('img/logo_rey.png')}}" alt="" width="200px;"></div>
+	    <ul class="vertical menu">
+			<li>
+				
+				<a target="_blank" href="http://reydecibel.com.mx">
+				<i class="fa fa-newspaper-o" aria-hidden="true"></i> Blog
+				</a>
+			</li>
+			<li>
+				<a href="/setlists">
+					<i class="fa fa-list" aria-hidden="true"></i> Mis Setlists
+				</a>
+			</li>
+			<li>
+				<a href="/songs">
+					<i class="fa fa-music" aria-hidden="true"></i> Mis Canciones
+				</a>
+			</li>
+			</li>
+			@yield('menu_extra')
+			<li>
+				<a target="_blank" href="https://www.facebook.com/ReyDecibelMx/">
+				<i class="fa fa-facebook-official" aria-hidden="true"></i> Síguenos
+			</a>
+			<li>
+				<a href="/logout">
+					<i class="fa fa-sign-out" aria-hidden="true"></i> Salir
+				</a>
+			</li>
+	    </ul>
+	    <div class="legal">
+
+			Todos los derechos reservados,2017. <a style="color:white" target="_blank" href="http://www.reydecibel.com.mx/terminos-condiciones-generador-setlists/">Términos y condiciones</a>
+		</div>
+
+	  </div>
+
+  <div class="off-canvas-content" data-off-canvas-content>
+ 
 		<div class="beta">Beta</div>
 		<div class="loader_wrapper">
 			<div class="loader"></div>
 		</div>	
+		<a class="menu_start" data-toggle="offCanvasLeft">
+			<i class="fa fa-bars" aria-hidden="true"></i>
+			MENÚ
+		</a>
 		<div class="container">
 			
 			<h1 class="text-center">
 				@yield('title')
 			</h1>
-			<nav class="main">
-				<ul>
-					{{-- <li><a href="#">Perfil</a></li> --}}
-					<li><a target="_blank" href="http://reydecibel.com.mx">Blog</a></li>
-					<li>{!! link_to_route('setlists.index', 'Mis Setlist') !!}</li>
-					<li>{!! link_to_route('songsIndex', 'Mis Canciones') !!}</li>
-					<li><a href="/logout">Salir</a></li>
-					
-					<li><a style="font-size:1.3em;" target="_blank" href="https://www.facebook.com/ReyDecibelMx/">
-							<i class="fa fa-facebook-official" aria-hidden="true"></i>
-						</a>
-					</li>
+			
 
-
-				</ul>
-			</nav>
 			
 			@yield('content')	
 				
 					
 				
 		</div><!--END: CONTAINER-->
-		<footer>
-			<div><img src=" {{asset('img/logo_rey.png')}} " width="100" alt=""></div>
-			Todos los derechos reservados,2017. <a style="color:white" href="http://www.reydecibel.com.mx/terminos-condiciones-generador-setlists/">Términos y condiciones</a>
-		</footer>
+		{{-- <footer>
+			
+		</footer> --}}
+</div><!-- END OFF CANVAS WRAPPER-->
 
 		@yield('modal')
 		
@@ -84,7 +121,7 @@
 		<script src="{{asset('js/vendor/foundation.js')}}"></script>
 		<script src="{{asset('js/vendor/selectize/js/selectize.min.js')}}"></script>
 		<script src="{{asset('js/vendor/sweetalert/sweetalert.min.js')}}"></script>
-		{{-- <script src="{{asset('plugins/angular/angular.min.js')}}"></script> --}}
+		<script src="{{asset('js/bower_components/chart.js/dist/Chart.min.js')}}"></script>
 
 
 		<script src="{{asset('js/app.js')}}"></script>

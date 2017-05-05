@@ -8,8 +8,9 @@
 	<ul class="list_rey">
 	@foreach ($setlists as $list)
 		<li>
-			{!! link_to_route('setlists.show', $list->name, [$list->id]) !!}
+			{{$list->name}}
 			<div class="trash" data-id="{{{$list->id}}}" data-type="setlist_delete"><i class="fa fa-trash" aria-hidden="true"></i></div>
+			<a href="setlists/{{{$list->id}}}" class="edit" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 		</li>
 		
 	@endforeach

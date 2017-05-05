@@ -27,8 +27,61 @@ input[type="text"]{
 	border-radius:5px;
 }
 
+h2{
+	font-size: 1.5em;
+}
+@media only screen and (max-width: 500px) {
+	h2{
+	font-size: 1em;
+}
+}
+.legal{
+	padding:0.7rem 1rem;
+	font-size: .7em;
+}
+
+.menu_start{
+	position: absolute;
+	top: -1px;
+	left: 10px;
+	background: white;
+	color:#AF0929;
+	font-size: .8em;
+	text-align: center;
+	padding: 10px;
+	font-family: 'Raleway', sans-serif; 
+	border-radius: 0 0 10px 10px;
+	cursor: pointer;
+	font-size: 1.2em;
+}
+
+.menu_start:hover{
+	color:#DE353A;
+}
+
+.off-canvas{
+	background: #DE353A;
+	background: black;
+	
+}
+
+.off-canvas a{
+	color:white;
+}
 
 
+.off-canvas .logo_menu{
+	margin-top:50px;
+	text-align: center;
+}
+
+.off-canvas .close-button:hover, .close-button:focus{
+	color:#EEEEEE;
+}
+
+.menu li:hover{
+	background: #333333;
+}
 .beta{
 	position: absolute;
 	top: -1px;
@@ -83,7 +136,7 @@ a:hover, a:focus{
 	max-width: 600px;
 	margin:auto;
 	padding-top: 50px;
-	padding-bottom: 100px;
+	padding-bottom: 20px;
 
 }
 
@@ -115,6 +168,10 @@ nav.main ul li:first-child{
 nav.main ul li a{
 	color:white;
 }
+
+/*SONGS */
+
+
 .list_rey{
 	margin:auto;
 }
@@ -127,6 +184,13 @@ nav.main ul li a{
 	margin-bottom:10px;
 	border-radius: 5px;
 	position: relative;
+	overflow: hidden;
+	padding-left: 20px;
+}
+@media only screen and (max-width: 500px) {
+	.list_rey li{
+		font-size: .8em;
+	}
 }
 
 .list_rey li a{
@@ -144,14 +208,66 @@ nav.main ul li a{
 .list_rey li .trash,.list_rey li .trash_song{
 	position: absolute;
 	top:0;
-	right:0;
+	right:5px;
 	background: #DE353A;
 	color: white;
 	display: inline-block;
 	padding: 10px;
-	border-radius: 0 5px 5px 0;
 	cursor: pointer;
+	width:40px;
+	text-align: center;
 
+}
+
+.list_rey li .edit{
+	position: absolute;
+	top:0;
+	right:40px;
+	background: #333333;
+	color: white;
+	display: block;
+	padding: 10px;
+	cursor: pointer;
+	width:40px;
+	text-align: center
+}
+
+.list_rey li .edit:hover,.list_rey li .edit:active,.list_rey li .edit:visited{
+	color:white;
+	width: 40px;
+}
+
+
+.list_rey li.song{
+	cursor: all-scroll;
+}
+
+.list_rey li.song.list_song{
+	cursor: default;
+}
+
+.list_rey li.song .intencity{
+	width: 5px;
+	height: 100px;
+	background-color: #333;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+.list_rey li.song .intencity.high{
+	background-color: red;
+}
+
+.list_rey li.song .intencity.medium{
+	background-color: #F1BD2B;
+}
+
+.list_rey li.song .intencity.low{
+	background-color: #00BF22;
 }
 
 .rey_button{
@@ -160,7 +276,7 @@ nav.main ul li a{
 	color:white;
 	padding: 10px;
 	border-radius: 5px;
-	background: black;
+	background: #333333;
 	margin-bottom: 10px;
 	cursor: pointer;
 	font-family: 'Raleway', sans-serif;
@@ -200,6 +316,9 @@ nav.main ul li a{
 	color:#333;
 }
 
+h1 .duration{
+	font-size: .8em;
+}
 
 
 
@@ -314,7 +433,7 @@ nav.main ul li a{
 
 
 .option.low .ui-state-active,.option.low .ui-button:active, .option.low .ui-button.ui-state-active:hover{
-	background: green;
+	background: #00BF22;
 	border:none;
 }
 
@@ -365,6 +484,16 @@ nav.main ul li a{
 /*SELECT2*/
 .select2-container{
 	display: block;
+}
+
+/*WAVES*/
+
+.waves{
+	padding: 10px;
+}
+
+.waves h2{
+	margin-bottom: 40px;
 }
 
 footer{
