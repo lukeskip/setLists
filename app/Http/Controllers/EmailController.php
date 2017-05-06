@@ -23,8 +23,8 @@ class EmailController extends Controller
             $setlist = Setlist::findOrFail($id);
             
             if (Auth::user()->id === $setlist->user_id) {
-                
-                Mail::send('emails.setlist', ['setlist' => Setlist::findOrFail($id),'songs'=>Song::where('setlist_id', '=',$id)->orderBy('position')->get()], function ($message)use ($email)
+                $setlists = Setlist::findOrFail($id);
+                Mail::send('emails.setlist', ['setlist' => $setlists], function ($message)use ($email)
                 {
 
                 $message->from('no_replay@reydecibel.com.mx', 'Rey Decibel')->subject('Tu Setlist by Rey Decibel');;
@@ -39,7 +39,7 @@ class EmailController extends Controller
             }
             
         }else{
-            return redirect('/login');
+            return redirect('/home');
         }
 
        

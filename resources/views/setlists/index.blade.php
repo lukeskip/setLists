@@ -8,9 +8,11 @@
 	<ul class="list_rey">
 	@foreach ($setlists as $list)
 		<li>
+			<a href="setlists/{{{$list->id}}}" >
 			{{$list->name}}
-			<div class="trash" data-id="{{{$list->id}}}" data-type="setlist_delete"><i class="fa fa-trash" aria-hidden="true"></i></div>
-			<a href="setlists/{{{$list->id}}}" class="edit" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+				<div class="trash" data-id="{{{$list->id}}}" data-type="setlist_delete"><i class="fa fa-trash" aria-hidden="true"></i></div>
+			</a>
+			
 		</li>
 		
 	@endforeach

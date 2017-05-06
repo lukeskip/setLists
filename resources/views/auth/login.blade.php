@@ -35,6 +35,7 @@
 		</div>
 
 		<div>
+		
 			<label>
 				<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recuérdame
 			</label>

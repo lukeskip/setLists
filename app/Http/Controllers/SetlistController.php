@@ -21,7 +21,7 @@ class SetlistController extends Controller
 			$setlists = Setlist::where('user_id', $user_id)->get();
 			return view('setlists.index')->with('setlists', $setlists);
 		}else{
-			return redirect('/login');
+			return redirect('/portada');
 		}
 		
 	}
@@ -95,7 +95,7 @@ class SetlistController extends Controller
         	}
 			
 		}else{
-			return redirect('/login');
+			return redirect('/portada');
 		}
 		
 	}
@@ -168,7 +168,7 @@ class SetlistController extends Controller
 		if($request->input('type')== 'song_detach'){
 			$type  	 = 'song_detach';
 			$song_id =  $request->input('song_id');
-			$setlist = Setlist::findOrFail(1);
+			$setlist = Setlist::findOrFail($id);
 			$setlist->songs()->detach($song_id);
 
 		}else if($request->input('type')== 'setlist_delete'){

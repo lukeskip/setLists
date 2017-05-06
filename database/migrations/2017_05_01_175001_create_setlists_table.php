@@ -17,6 +17,7 @@ class CreateSetlistsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('name')->unique();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

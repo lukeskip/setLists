@@ -22,7 +22,7 @@ class SongController extends Controller
 			$songs = Song::where('user_id', $user_id)->orderBy('name')->get();
 			return view('songs.index')->with('songs', $songs);
 		}else{
-			return redirect('/login');
+			return redirect('/portada');
 		}
 	}
 
@@ -58,7 +58,7 @@ class SongController extends Controller
 		$song = new Song(['user_id'=>$user_id,'name' => $request->input('name'),'intencity'=>$request->input('intencity'),'duration'=>$request->input('duration')]);
 		
 
-		if($request->input('simple')!=''){
+		if($request->input('simple')!='n'){
 			$song->save();
 		}else{
 			$setlist = Setlist::findOrFail($id);
@@ -114,29 +114,25 @@ class SongController extends Controller
 
 	}
 
-	public function position(Request $request, $id)
+	public function attach(Request $request, $id)
 	{
 		
-		$repeated = false;
-		$position   	= $request->input('position');
-		$setlist_id 	= $request->input('setlist_id');
-		$setlist = Setlist::findOrFail($setlist_id)->with('songs')->first();
-		
-
+		$repeated 	 = false;
+		$position    = $request->input('position');
+		$setlist_id  = $request->input('setlist_id');
+		$setlist 	 = Setlist::findOrFail(2);
+		$array 		 = array();
+ 
 		foreach ($setlist->songs as $key => $song) {
 			if($song->id == $id){
-				$repeated = true;
+				return response()->json(['status' => 'repeated','id'=>$setlist_id]);
 			}
-
 		}
 		
 		
-		if(!$repeated){
 			$setlist->songs()->attach($id, ['position' => $position]);
 			return response()->json(['status' => 'success','id'=>$setlist_id]); 
-		}else{
-			return response()->json(['status' => 'repeated','id'=>$setlist_id]);
-		}
+	
 
 	}
 

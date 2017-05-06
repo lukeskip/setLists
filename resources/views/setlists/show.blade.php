@@ -62,7 +62,8 @@
 						<input type="text" class="song_input" name="name">
 						<input type="hidden"  name="id" value="{{$setlist->id}}">
 						<input type="hidden"  name="_method" value="POST">
-						<input type="hidden"  name="songs" value="true">	
+						<input type="hidden"  name="songs" value="true">
+						<input type="hidden"  name="simple" value="n" class="simple">	
 					
 					</div>
 					
@@ -145,7 +146,7 @@
 		<form id="song_add" action="">
 			<input type="hidden" name="setlist_id" value="{{{$setlist->id}}}">
 			<select name="song_to_add" id="" class="song_to_add">
-				<option value="">Selecciona una canción...</option>
+				<option value="">Busca la canción escribiendo</option>
 				@foreach ($songs as $key => $song)
 					<option value="{{$song->id}}">{{$song->name}}</option>
 				@endforeach

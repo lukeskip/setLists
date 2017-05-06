@@ -219,7 +219,7 @@ $(document).ready(function(){
 			url: APP_URL + '/songs/'+id,
 			success:function(response)
 			{
-				// console.log(response);
+				console.log(response);
 				if(response.status=='success'){
 					swal({
 					  title: "Listo",
@@ -307,7 +307,7 @@ $(document).ready(function(){
 					  closeOnConfirm: true
 					},
 					function(){
-						if(simple ==''){
+						if(simple =='n'){
 							window.location.replace(APP_URL+'/setlists/'+response.id);
 						}else{
 							window.location.replace(APP_URL+'/songs/');
@@ -316,7 +316,7 @@ $(document).ready(function(){
 					});
 					
 				}else{
-					sweetAlert("Ese setlist ya existe", "", "error");
+					sweetAlert("Esa canción ya existe", "", "error");
 				}
 			},
 			error: function(data) {
@@ -446,7 +446,7 @@ $(document).ready(function(){
         }
     });
 
-    // SELECT2
+    // SELECTIZE
 
     $('.song_to_add').selectize({
     	sortField: 'text'

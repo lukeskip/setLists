@@ -15,7 +15,7 @@
     
     <h1 style="color:#AF0929; text-align: center; font-size: 40px">Setlist {{$setlist->name}}</h1>
    
-@foreach ($songs as $key => $song) 			
+@foreach ($setlist->songs as $key => $song) 			
 	 <div style="background: #EEEEEE; color:black; padding: 10px;text-align: center; border-radius: 5px;font-size: 25px; margin:20px;">
 		<span>{{{$key+1}}}.-</span>
 		<span class="title">{{{$song->name}}}</span>

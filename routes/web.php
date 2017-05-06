@@ -33,10 +33,13 @@ Route::post('deleteSetlist/{id}','SetlistController@destroy');
 Route::post('deleteSong/{id}','SongController@destroy');
 Route::get('/songs','SongController@index')->name('songsIndex');;
 Route::post('/send', 'EmailController@send');
-Route::post('/songs/{id}', 'SongController@position');
+Route::post('/songs/{id}', 'SongController@attach');
 Route::post('/newSong', 'SongController@store');
 Route::post('/editSong/{id}', 'SongController@update');
 
+// Social plugins
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/callback', 'SocialAuthController@callback');
 
 
 

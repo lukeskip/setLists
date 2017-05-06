@@ -327,6 +327,7 @@ h1 .duration{
 	padding: 40px;
 	padding-top: 80px;
 	border:none;
+	min-height: 300px;
 }
 
 .reveal .close-button{

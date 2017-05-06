@@ -39,4 +39,10 @@ return [
         'secret' => env('MANDRILL_KEY'),
     ],
 
+    'facebook' => [
+    'client_id' => '286578578434424',
+    'client_secret' => '66d29d7e4575fea8ef4ed179407a9249',
+    'redirect' => 'http://reservaciones.dev:8000/callback',
+    ],
+
 ];
