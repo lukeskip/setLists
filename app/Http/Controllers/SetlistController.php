@@ -6,6 +6,7 @@ use App\Setlist as Setlist;
 use App\Song as Song;
 use Illuminate\Support\Facades\Auth as Auth;
 use Validator;
+use PDF;
 
 class SetlistController extends Controller
 {
@@ -90,6 +91,39 @@ class SetlistController extends Controller
 
 			if ($user_id === $setlist->user_id) {
             	return view('setlists.show', ['setlist' => $setlist,'songs'=>$songs,'duration'=>$duration]);
+        	}else{
+        		return "No estas autorizado para estar aquí";
+        	}
+			
+		}else{
+			return redirect('/portada');
+		}
+		
+	}
+
+	public function print($id)
+	{
+		if (Auth::check()) {
+			$user_id = Auth::user()->id;
+			$setlist = Setlist::findOrFail($id);
+			$songs = Song::where('user_id', $user_id)->get();
+			$songs_list = $setlist->songs;
+			$duration = 0;
+			foreach ($songs_list as $key => $song) {
+				$duration_str = explode(':',$song->duration);
+				$minutes = $duration_str[0] * 60;
+				$seconds = $duration_str[1];
+ 				$adding  = $minutes + $seconds;
+ 				$duration= $duration + $adding;
+			}
+			
+			$duration = gmdate("i:s", $duration);
+			
+
+			if ($user_id === $setlist->user_id) {
+            	
+            	$pdf = PDF::loadView('setlists.show',['setlist' => $setlist,'songs'=>$songs,'duration'=>$duration]);
+  				return $pdf->download('pruebapdf.pdf');
         	}else{
         		return "No estas autorizado para estar aquí";
         	}

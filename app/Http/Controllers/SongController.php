@@ -120,7 +120,7 @@ class SongController extends Controller
 		$repeated 	 = false;
 		$position    = $request->input('position');
 		$setlist_id  = $request->input('setlist_id');
-		$setlist 	 = Setlist::findOrFail(2);
+		$setlist 	 = Setlist::findOrFail($setlist_id);
 		$array 		 = array();
  
 		foreach ($setlist->songs as $key => $song) {
@@ -130,8 +130,8 @@ class SongController extends Controller
 		}
 		
 		
-			$setlist->songs()->attach($id, ['position' => $position]);
-			return response()->json(['status' => 'success','id'=>$setlist_id]); 
+		$setlist->songs()->attach($id, ['position' => $position]);
+		return response()->json(['status' => 'success','id'=>$setlist_id]); 
 	
 
 	}

@@ -10,8 +10,9 @@
 		<li>
 			<a href="setlists/{{{$list->id}}}" >
 			{{$list->name}}
-				<div class="trash" data-id="{{{$list->id}}}" data-type="setlist_delete"><i class="fa fa-trash" aria-hidden="true"></i></div>
 			</a>
+			<div class="trash" data-id="{{{$list->id}}}" data-type="setlist_delete"><i class="fa fa-trash" aria-hidden="true"></i></div>
+			
 			
 		</li>
 		

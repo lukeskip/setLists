@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('menu_extra')
 	<li><a href="#" class="send" data-email="{{{ Auth::user()->email}}}" data-id="{{$setlist->id}}" data-toggle="offCanvasLeft"><i class="fa fa-share-alt" aria-hidden="true" data-toggle="offCanvasLeft"></i> Compartir Setlist</a></li>
+	<li><a href="/print/{{{$setlist->id}}}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar Setlist</a></li>
 	<li><a href="#" class="create_song" data-toggle="offCanvasLeft"><i class="fa fa-plus-circle" aria-hidden="true"></i> Crear Canción</a></li>
 @stop
 @section('title')

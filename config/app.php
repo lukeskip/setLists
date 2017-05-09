@@ -137,6 +137,7 @@ return [
 
     'providers' => [
         Collective\Html\HtmlServiceProvider::class,
+
         /*
          * Laravel Framework Service Providers...
          */
@@ -169,6 +170,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -179,6 +181,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        
 
     ],
 
@@ -194,6 +197,7 @@ return [
     */
 
     'aliases' => [
+        'PDF' => 'Barryvdh\DomPDF\Facade',
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

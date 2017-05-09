@@ -40,7 +40,7 @@ $(document).ready(function(){
 				},
 				type: 'POST',
 				url: APP_URL + url +id,
-				data : {'song_id':song_id,'type':type,'_method':'DELETE'},
+				data : {'song_id':song_id,'type':type,'_method':'POST'},
 				success:function(response)
 				{
 					
@@ -122,7 +122,8 @@ $(document).ready(function(){
 						if(response.status=='success'){
 							window.location.replace(APP_URL+'/setlists/'+response.id);
 						}else{
-							sweetAlert("Esa canción ya existe", "", "error");
+							sweetAlert("Ese setlist ya existe", "", "error");
+							$('.loader_wrapper').css('display','none');
 						}
 					}
 				});
