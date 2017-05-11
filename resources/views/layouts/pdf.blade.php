@@ -190,7 +190,7 @@ h1 .duration{
 	</head>
 	<body>
 		<div class="legal row" style="text-align: center;margin-bottom:50px;">
-			<img src="{{assets('img/logo_rey.png')}}" width="150" alt="">
+			<img src="{{asset('img/logo_rey.png')}}" width="150" alt="">
     		Gracias, por utilizar el generador de Setlists de Rey Decibel.
   		</div>
 		<h1>
