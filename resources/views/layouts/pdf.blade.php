@@ -5,17 +5,11 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Generador de SetList</title>
-		<link rel="stylesheet" href="{{asset('js/vendor/selectize/css/selectize.default.css')}}">
-		<link rel="stylesheet" href="{{asset('css/foundation.css')}}">
+		
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="shortcut icon" type="favicon/png" href="{{asset('img/favicon.png')}}"/>
 		
-		<link rel="stylesheet" href="{{asset('js/vendor/jquery-ui/jquery-ui.min.css')}}">
-		<link rel="stylesheet" href="{{asset('js/vendor/sweetalert/sweetalert.css')}}">
-		
-
-		<link rel="stylesheet" href="{{asset('css/app.css')}}">
 		
 		<meta property="og:url"                content="http://setlist.reydecibel.com.mx" />
 		<meta property="og:title"              content="Generador de Setlist" />
@@ -195,26 +189,16 @@ h1 .duration{
 
 	</head>
 	<body>
+		<div class="legal row" style="text-align: center;margin-bottom:50px;">
+			<img src="{{assets('img/logo_rey.png')}}" width="150" alt="">
+    		Gracias, por utilizar el generador de Setlists de Rey Decibel.
+  		</div>
 		<h1>
 			@yield('title')
 		</h1>
 		
 		@yield('content')
 
-		
-		
-		<script src="{{asset('js/vendor/jquery.js')}}"></script>
-		<script src="{{asset('js/vendor/jquery-ui/jquery-ui.min.js')}}"></script>
-		<script src="{{asset('js/vendor/jquery-ui/touchpunch.js')}}"></script>
-		<script src="{{asset('js/laroute.js')}}"></script>
-		<script src="{{asset('js/vendor/what-input.js')}}"></script>
-		<script src="{{asset('js/vendor/foundation.js')}}"></script>
-		<script src="{{asset('js/vendor/selectize/js/selectize.min.js')}}"></script>
-		<script src="{{asset('js/vendor/sweetalert/sweetalert.min.js')}}"></script>
-		<script src="{{asset('js/bower_components/chart.js/dist/Chart.min.js')}}"></script>
-
-
-		<script src="{{asset('js/app.js')}}"></script>
 
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

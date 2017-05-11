@@ -101,7 +101,7 @@ class SetlistController extends Controller
 		
 	}
 
-	public function print($id)
+	public function print_pdf($id)
 	{
 		if (Auth::check()) {
 			$user_id = Auth::user()->id;

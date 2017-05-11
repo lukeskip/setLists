@@ -38,7 +38,7 @@ Route::post('/songs/{id}', 'SongController@attach');
 Route::post('/newSong', 'SongController@store');
 Route::post('/editSong/{id}', 'SongController@update');
 
-Route::get('/pdf/{id}', 'SetlistController@print');
+Route::get('/pdf/{id}', 'SetlistController@print_pdf');
 
 // Social plugins
 Route::get('/redirect', 'SocialAuthController@redirect');

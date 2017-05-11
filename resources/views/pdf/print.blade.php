@@ -7,9 +7,7 @@
   <span>{{{$setlist->name}}}</span> <span class="duration"> [Duración: {{$duration}}] </span>
 @stop
 @section('content')
-  <div class="legal row" style="text-align: center;margin-bottom:50px;">
-    Gracias, por utilizar el generador de Setlists de Rey Decibel.
-  </div>
+  
   <div class="row">
     <div class="large-12 columns">
       <ul id="sortable" class="list_rey">

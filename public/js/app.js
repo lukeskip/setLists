@@ -40,7 +40,7 @@ $(document).ready(function(){
 				},
 				type: 'POST',
 				url: APP_URL + url +id,
-				data : {'song_id':song_id,'type':type,'_method':'POST'},
+				data : {'song_id':song_id,'type':type,'_method':'DELETE'},
 				success:function(response)
 				{
 					
@@ -281,18 +281,18 @@ $(document).ready(function(){
 		if(action == 'edit'){
 			url ='/editSong/'+id;
 		}else{
-			url = '/newSong/';
+			url = '/newSong';
 		}
 
-		// console.log(id);
+		console.log($(this).serialize());
 
 		$.ajax({
 			headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			},
 			type: 'POST',
-			data: $(this).serialize()+'&position='+ position,
 			dataType: "JSON",
+			data: $(this).serialize()+'&position='+ position,
 			url: APP_URL + url,
 			success:function(response)
 			{
@@ -300,7 +300,7 @@ $(document).ready(function(){
 				if(response.status=='success'){
 					swal({
 					  title: "Listo",
-					  text: "Tu canción fue editada",
+					  text: "Tu canción fue guardada",
 					  type: "success",
 					  showCancelButton: false,
 					  confirmButtonColor: "#DD6B55",
@@ -324,6 +324,9 @@ $(document).ready(function(){
 				sweetAlert("Hubo un error en el servidor", "Por favor, Inténtalo de nuevo en unos minutos", "error");
 			}
 		});
+
+
+		
 	});
 
 	
